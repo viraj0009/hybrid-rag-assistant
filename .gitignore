@@ -1,5 +1,22 @@
+# Environments
 venv/
+.venv/
+env/
+
+# Python cache
 __pycache__/
 *.pyc
+
+# Environment variables
+.env
+
+# Data files (Exclude large PDFs or local databases if they change often)
+data/documents/
+# If you have local vector store persistent folders, add them here
+# faiss_index/ 
+
+# VS Code settings
 .vscode/
-version.text
+
+# OS generated files
+.DS_Store

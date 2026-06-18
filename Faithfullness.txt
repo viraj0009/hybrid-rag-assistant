@@ -1,0 +1,26 @@
+(venv) PS E:\agentic-rag-assistant> python evaluation.py
+ Generating answers and scoring...
+Q: What is Artificial Intelligence?
+A: Artificial Intelligence (AI) is a field of computer science focused on building systems that can perform tasks that normally require human intelligence, such as understanding language, recognizing images, solving problems, and making decisions.
+Faithfulness: 1.00 | Relevancy: 1.00
+Q: What is Machine Learning?
+A: Machine Learning is a subset of Artificial Intelligence that allows computers to learn patterns from data instead of being explicitly programmed. Popular types of machine learning include supervised learning, unsupervised learning, and reinforcement learning.
+Faithfulness: 1.00 | Relevancy: 1.00
+Q: What is Deep Learning?
+A: Deep Learning is a specialized area of machine learning that uses neural networks with many layers. It is commonly used in applications such as speech recognition, computer vision, and natural language processing.
+Faithfulness: 1.00 | Relevancy: 1.00
+Q: What are Large Language Models?
+A: Large Language Models (LLMs) are deep learning models trained on massive text datasets. They can generate human-like text, answer questions, summarize documents, and assist with many knowledge-based tasks.
+Faithfulness: 1.00 | Relevancy: 1.00
+Q: What is Retrieval Augmented Generation?
+A: Retrieval Augmented Generation (RAG) is a technique that improves Language Models' responses by retrieving relevant information from external documents before generating an answer, allowing the system to provide more accurate and up-to-date responses.
+Faithfulness: 0.95 | Relevancy: 1.00
+==================================================
+       EVALUATION RESULTS
+==================================================
+  Faithfulness:      0.99
+  Answer Relevancy:  1.00
+==================================================
+ These scores go on your resume!
+ Example: 'Achieved Faithfulness: 0.99, Relevancy: 1.00 via RAG evaluation'
+(venv) PS E:\agentic-rag-assistant>

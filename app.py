@@ -1,40 +1,42 @@
 from src.load_docs import load_documents
 from src.chunk_docs import chunk_documents
 from src.vector_store import create_vector_store
-from src.llm import generate_answer
+from langchain_ollama import ChatOllama
 
 docs = load_documents("data/documents/sample_ai_document_for_rag.pdf")
 
 chunks = chunk_documents(docs)
 
-vectorstore = create_vector_store(chunks)
+retriever = create_vector_store(chunks)
+llm = ChatOllama(model="qwen2.5:1.5b", temperature=0, num_ctx=1024)
+
+system_prompt = """
+You are a PDF question-answering agent.
+Answer ONLY using the provided PDF context.
+If the tool results do not contain the answer, say:
+"I cannot find the answer in the document."
+"""
+
+def get_rag_response(question):
+    docs_found = retriever.invoke(question)
+    context = "\n\n".join([d.page_content for d in docs_found])
+
+    response = llm.invoke([
+        ("system", system_prompt),
+        ("user", f"PDF Context\n{context}\n\nQuestion: {question}")
+    ])
+
+    return response.content, [d.page_content for d in docs_found]
 
 while True:
-    query = input("\nAsk question (or type 'exit'): ")
-    
-    if query.lower() == "exit":
-        break
+    user_input = input("\nAsk question (or 'exit'): ")
+    if user_input.lower() == "exit": break
 
-    results = vectorstore.similarity_search_with_score(query, k=3)
+    docs_found = retriever.invoke(user_input)
+    context = "\n\n".join([d.page_content for d in docs_found])
 
-    relevant_docs = []
-
-    for doc, score in results:
-        if score < 1.0:
-            relevant_docs.append(doc)
-
-    if len(relevant_docs) == 0 or all(score > 1.0 for _, score in results):
-        answer = "I cannot find the answer in the document." 
-    else:
-        context = "\n".join([doc.page_content[:300] for doc in relevant_docs[:2]])
-        answer = generate_answer(context, query)
-
-    print("\nAnswer:\n")
-    print(answer)
-
-    if len(relevant_docs) > 0:
-        print("\nSource Chunks:\n")
-        for i, doc in enumerate(relevant_docs):
-            print(f"Source {i+1}")
-            print(doc.page_content[:150])
-            print("-"*30)
+    response = llm.invoke([
+        ("system", system_prompt),
+        ("user", f"PDF context:\n{context}\n\nQuestion: {user_input}")
+    ])
+    print(response.content)
