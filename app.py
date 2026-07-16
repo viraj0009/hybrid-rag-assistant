@@ -30,13 +30,9 @@ def get_rag_response(question):
 
 while True:
     user_input = input("\nAsk question (or 'exit'): ")
-    if user_input.lower() == "exit": break
 
-    docs_found = retriever.invoke(user_input)
-    context = "\n\n".join([d.page_content for d in docs_found])
+    if user_input.lower() == "exit":
+        break
 
-    response = llm.invoke([
-        ("system", system_prompt),
-        ("user", f"PDF context:\n{context}\n\nQuestion: {user_input}")
-    ])
-    print(response.content)
+    answer, chunks = get_rag_response(user_input)
+    print(answer)
