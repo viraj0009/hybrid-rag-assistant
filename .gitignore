@@ -20,3 +20,7 @@ data/documents/
 
 # OS generated files
 .DS_Store
+version.txt
+app.zip
+
+EVALUATION_NOTES.txt

@@ -23,7 +23,7 @@ If the tool results do not contain the answer, say:
 """
 
 judge = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
+    model="gemini-3-flash-preview",
     google_api_key=GEMINI_API_KEY,
     temperature=0,
 )
@@ -47,7 +47,7 @@ Answer: {answer}
 Score:"""
     response = judge.invoke(prompt)
     try:
-        return float(response.content.strip())
+        return float(response.content[0]["text"])
     except:
         return 0.0
 
@@ -61,7 +61,7 @@ Answer: {answer}
 Score:"""
     response = judge.invoke(prompt)
     try:
-        return float(response.content.strip())
+        return float(response.content[0]["text"])
     except:
         return 0.0
 

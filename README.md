@@ -1,4 +1,4 @@
-# 🤖 Agentic RAG Assistant
+# 🤖 Hybrid RAG Assistant
 
 A local Retrieval-Augmented Generation (RAG) system that allows users to ask questions about PDF documents and receive context-grounded answers using a local LLM.
 
