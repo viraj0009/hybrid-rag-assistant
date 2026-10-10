@@ -22,7 +22,7 @@ If the tool results do not contain the answer, say:
 "I cannot find the answer in the document."
 """
 
-st.title("Agentic RAG Assistant")
+st.title("Hybrid RAG Assistant")
 st.caption("Hybrid Search (FAISS + BM25) | Local LLM | Thought Process Visualization")
 
 st.sidebar.header("System Info")
@@ -33,7 +33,7 @@ st.sidebar.metric("LLM", "Qwen2.5:1.5b")
 query = st.text_input("Ask a question about the document:", placeholder="e.g. What is Retrieval Augmented Generation?")
 
 if query:
-    with st.expander("Agent Thought Process", expanded=True):
+    with st.expander("RAG Pipeline Execution", expanded=True):
 
         step1 = st.empty()
         step1.info("**Step 1 - Query Analysis**")
